@@ -1,0 +1,52 @@
+package com.example.one_note;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.one_note.data.databaseHelper;
+import com.example.one_note.model.user;
+
+public class CREATE extends AppCompatActivity {
+
+    databaseHelper db;
+    Button sn;
+    EditText nh, n;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_c_r_e_a_t_e);
+        db = new databaseHelper(this);
+        nh = findViewById(R.id.NH);
+        n = findViewById(R.id.N);
+        sn = findViewById(R.id.SN);
+
+    }
+    public void clickSave(View view) {
+        String name = nh.getText().toString();
+        String context = n.getText().toString();
+        // Check if note name EditText is empty. If empty, don't save and show error toast
+        if (name.equals(""))
+        {
+            Toast.makeText(CREATE.this, "Please enter note name", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            long result = db.insertnote(new user(name, context));
+            if (result > 0)
+            {
+                Toast.makeText(CREATE.this, "Note saved", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            else {
+                Toast.makeText(CREATE.this, "Some Error occured", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+
+    }
+}
+
