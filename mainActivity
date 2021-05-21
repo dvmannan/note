@@ -1,0 +1,30 @@
+package com.example.one_note;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button butcr, butan;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        butcr = findViewById(R.id.butCR);
+        butan = findViewById(R.id.butAN);
+    }
+    public void clickCreate(View view)
+    {
+        Intent I = new Intent(MainActivity.this, CREATE.class);
+        startActivity(I);
+    }
+
+    public void clickAll(View view)
+    {
+        Intent i = new Intent(MainActivity.this, ALL.class);
+        startActivity(i);
+    }
+}
